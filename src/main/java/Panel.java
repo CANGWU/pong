@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -18,7 +19,7 @@ public class Panel extends JPanel {
 	private Color playerColor;
 	private PongPlayer player1= new PongPlayer(getWidth()+30,getHeight()+50,15,80, Color.WHITE);
 	private PongPlayer player2 = new PongPlayer(getWidth()+550,getHeight()+50,15,80, Color.WHITE);
-	private PongBall ball = new PongBall(getWidth()+200, getHeight()+50, 10, Color.WHITE);
+	private PongBall ball = new PongBall(getWidth()+200, getHeight()+50, 5,5,  10, Color.WHITE, this);
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -40,8 +41,6 @@ public class Panel extends JPanel {
 		player1.draw(g);
 		player2.draw(g);
 		
-	
-		
 	}
 	public Panel() {
 		playerUp = 100;
@@ -50,6 +49,9 @@ public class Panel extends JPanel {
 		
 		
 		this.setBackground(Color.BLACK);
+
+		new Thread(new BallMovingThread()).start();
+
 	}
 	
 	public void shiftDirection(int code) {
@@ -65,5 +67,26 @@ public class Panel extends JPanel {
     	} else if (code == 'S' || code == 's') {
     		player1.setY(player1.getY()+10);
     	} 
+	}
+
+
+	/**
+	 * the thread that control the moving of ball
+	 */
+	class BallMovingThread implements Runnable{
+
+		@Override
+		public void run() {
+
+			while (true){
+				ball.move();
+				try {
+					TimeUnit.MILLISECONDS.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
 	}
 }

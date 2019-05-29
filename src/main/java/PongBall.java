@@ -8,18 +8,32 @@ public class PongBall  {
 	private int y;
 	private int radius;
 	private Color color;
+	/**
+	 * the moving speed of x
+	 */
+	private int speedX;
+
+	/**
+	 * the moving speed of y
+	 */
+	private int speedY;
+
+
+	private Panel pongPanel;
+
 	
-	public PongBall(int x, int y, int radius, Color color) {
+	public PongBall(int x, int y, int speedX, int speedY,  int radius, Color color, Panel pongPanel) {
 		this.x = x;
 		this.y = y;
+		this.speedX = speedX;
+		this.speedY = speedY;
 		this.radius = radius;
-		
 		this.color = color;
+		this.pongPanel = pongPanel;
 	}
 	public void draw(Graphics g) {
-		g.setColor(color); 
+		g.setColor(color);
 		g.fillOval(x, y, radius, radius);
-		g.setColor(Color.WHITE);
 		g.drawOval(x, y, radius,radius);
 	}
 	public int getX() {
@@ -56,9 +70,27 @@ public class PongBall  {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
-	
-	
+
+
+	/**
+	 * the action of moving
+	 */
+	public void move(){
+
+		// 边界与碰撞判断
+		if(x<=0 || x+radius>=pongPanel.getWidth()) {
+			speedX = -speedX;
+		}
+		if(y<=0 || y+radius>=pongPanel.getHeight()) {
+			speedY = -speedY;
+		}
+		x += speedX;
+		y += speedY;
+
+		pongPanel.repaint();
+
+	}
+
 	
 
 }

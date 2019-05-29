@@ -16,7 +16,6 @@ public class PongPlayer {
 	public void draw(Graphics g) {
 		g.setColor(color); 
 		g.fillRect(x, y, width, height);
-		g.setColor(Color.WHITE);
 		g.drawRect(x, y, width, height);
 	}
 	public int getX() {
