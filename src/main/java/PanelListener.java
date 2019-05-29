@@ -14,7 +14,8 @@ public class PanelListener implements KeyListener, ActionListener{
 	public PanelListener(Panel p) {
 		panel = p;
 		panel.addKeyListener(this);
-		
+
+
 	}
 
 	@Override
@@ -26,15 +27,12 @@ public class PanelListener implements KeyListener, ActionListener{
 	@Override
 	public void keyTyped(KeyEvent e) {
 		char ch = e.getKeyChar();  // The character typed.
+		if(ch == 's' || ch == 'w' || ch == 'S' || ch == 'W'){
+			panel.shiftDirection(ch);
 
-        if (ch == 'W') {
-            panel.shiftDirection(ch);
-             // Redraw panel with new color.
-        }
-        else if (ch == 'S') {
-            panel.shiftDirection(ch);
-        }
-		
+		}
+		panel.repaint();
+
 	}
 
 	@Override

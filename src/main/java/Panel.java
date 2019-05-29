@@ -18,7 +18,7 @@ public class Panel extends JPanel {
 	private Color playerColor;
 	private PongPlayer player1= new PongPlayer(getWidth()+30,getHeight()+50,15,80, Color.WHITE);
 	private PongPlayer player2 = new PongPlayer(getWidth()+550,getHeight()+50,15,80, Color.WHITE);
-	private PongBall ball = new PongBall(getWidth()+300, getHeight()+50, 10,Color.WHITE);
+	private PongBall ball = new PongBall(getWidth()+200, getHeight()+50, 10, Color.WHITE);
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -54,16 +54,16 @@ public class Panel extends JPanel {
 	
 	public void shiftDirection(int code) {
     	if (code == KeyEvent.VK_UP) {
-    		player1.setY(player1.getY()+10);
+    		player2.setY(player2.getY()-10);
     	} else if (code == KeyEvent.VK_DOWN) {
-    		player1.setY(player1.getY()-10);
+    		player2.setY(player2.getY()+10);
     	} 
     }
 	public void shiftDirection(char code) {
-		if (code == 'W') {
-			player2.setY(player1.getY()+10);
-    	} else if (code == 'S') {
-    		player2.setY(player1.getY()-10);
+		if (code == 'W' || code == 'w') {
+			player1.setY(player1.getY()-10);
+    	} else if (code == 'S' || code == 's') {
+    		player1.setY(player1.getY()+10);
     	} 
 	}
 }

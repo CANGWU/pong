@@ -12,6 +12,8 @@ public class PongMain {
 		new PanelListener(pongPanel);
 		window.setContentPane(pongPanel);
 		window.setVisible(true);
+		// set panel to get the focus of input
+		pongPanel.requestFocus();
 		
 		
 	}
