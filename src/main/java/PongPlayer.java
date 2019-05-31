@@ -98,5 +98,6 @@ public class PongPlayer {
 
 	public void updatePoint(){
 		this.point++;
+		System.out.println(name + "get one point and total points are " + point);
 	}
 }
