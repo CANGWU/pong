@@ -17,9 +17,9 @@ public class Panel extends JPanel {
 	private PongPlayer[] pongPlayers = new PongPlayer[2];
 	private int playerUp, playerLeft, player2Up, player2Right;
 	private Color playerColor;
-	private PongPlayer player1= new PongPlayer(getWidth()+30,getHeight()+50,15,80, Color.WHITE);
-	private PongPlayer player2 = new PongPlayer(getWidth()+550,getHeight()+50,15,80, Color.WHITE);
-	private PongBall ball = new PongBall(getWidth()+200, getHeight()+50, 5,5,  10, Color.WHITE, this);
+	private PongPlayer player1= new PongPlayer("p1",getWidth()+30,getHeight()+50,15,80, 0, Color.WHITE);
+	private PongPlayer player2 = new PongPlayer("p2", getWidth()+550,getHeight()+50,15,80, 0, Color.WHITE);
+	private PongBall ball = new PongBall(getWidth()+200, getHeight()+50, 11,11,  10, Color.WHITE, this, player1, player2);
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -55,17 +55,17 @@ public class Panel extends JPanel {
 	}
 	
 	public void shiftDirection(int code) {
-    	if (code == KeyEvent.VK_UP) {
-    		player2.setY(player2.getY()-10);
-    	} else if (code == KeyEvent.VK_DOWN) {
-    		player2.setY(player2.getY()+10);
-    	} 
+    	if (code == KeyEvent.VK_UP && player2.getY() >= 10) {
+    		player2.setY(player2.getY() - 10);
+    	} else if (code == KeyEvent.VK_DOWN && player2.getY() + 80 <= getHeight()) {
+    		player2.setY(player2.getY() + 10);
+    	}
     }
 	public void shiftDirection(char code) {
-		if (code == 'W' || code == 'w') {
-			player1.setY(player1.getY()-10);
-    	} else if (code == 'S' || code == 's') {
-    		player1.setY(player1.getY()+10);
+		if ((code == 'W' || code == 'w') && player1.getY() >= 10) {
+			player1.setY(player1.getY() - 10);
+    	} else if ((code == 'S' || code == 's') && player1.getY() + 80 <= getHeight()) {
+    		player1.setY(player1.getY() + 10);
     	} 
 	}
 
@@ -81,7 +81,7 @@ public class Panel extends JPanel {
 			while (true){
 				ball.move();
 				try {
-					TimeUnit.MILLISECONDS.sleep(500);
+					TimeUnit.MILLISECONDS.sleep(100);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
