@@ -1,10 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
+
 import java.util.Objects;
+import java.util.Observable;
 import java.util.Random;
 
-public class PongBall  {
+public class PongBall extends Observable {
 	private int x;
 	private int y;
 	private int radius;
@@ -21,6 +22,15 @@ public class PongBall  {
 
 
 	private Panel pongPanel;
+
+	public PongPlayer getP1() {
+		return p1;
+	}
+
+	public PongPlayer getP2() {
+		return p2;
+	}
+
 	private PongPlayer p1;
 	private PongPlayer p2;
 
@@ -103,6 +113,10 @@ public class PongBall  {
 		}else if(x <= 30 || x >= 550){
 			if (Objects.nonNull(lastHitPlayer)) {
 				lastHitPlayer.updatePoint();
+				setChanged();
+				notifyObservers();
+
+
 			}
 			resetLocation();
 		}
@@ -136,7 +150,7 @@ public class PongBall  {
 
 	}
 
-	
+
 
 }
 	

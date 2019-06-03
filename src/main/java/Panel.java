@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Observer;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
@@ -88,5 +89,9 @@ public class Panel extends JPanel {
 			}
 
 		}
+	}
+
+	public void addPongBallListener(Observer observer){
+		this.ball.addObserver(observer);
 	}
 }
