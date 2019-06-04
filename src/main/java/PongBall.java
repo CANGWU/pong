@@ -111,13 +111,17 @@ public class PongBall extends Observable {
 			lastHitPlayer = p2;
 			speedX = -speedX;
 		}else if(x <= 30 || x >= 550){
-			if (Objects.nonNull(lastHitPlayer)) {
-				lastHitPlayer.updatePoint();
-				setChanged();
-				notifyObservers();
-
-
+			if (Objects.isNull(lastHitPlayer)) {
+				// if no player hit the ball， that who can not hit the ball lose this game
+				if(x > 300 ){
+					lastHitPlayer = p1;
+				}else {
+					lastHitPlayer = p2;
+				}
 			}
+			lastHitPlayer.updatePoint();
+			setChanged();
+			notifyObservers();
 			resetLocation();
 		}
 

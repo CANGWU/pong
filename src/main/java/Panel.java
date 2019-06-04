@@ -22,6 +22,11 @@ public class Panel extends JPanel {
 	private PongPlayer player2 = new PongPlayer("p2", getWidth()+550,getHeight()+50,15,80, 0, Color.WHITE);
 	private PongBall ball = new PongBall(getWidth()+200, getHeight()+50, 11,11,  10, Color.WHITE, this, player1, player2);
 
+	/**
+	 *  if the game is ongoing
+	 */
+	private boolean isOngoing = true;
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);	
@@ -79,7 +84,7 @@ public class Panel extends JPanel {
 		@Override
 		public void run() {
 
-			while (true){
+			while (isOngoing){
 				ball.move();
 				try {
 					TimeUnit.MILLISECONDS.sleep(100);
@@ -93,5 +98,9 @@ public class Panel extends JPanel {
 
 	public void addPongBallListener(Observer observer){
 		this.ball.addObserver(observer);
+	}
+
+	public void closeGame(){
+		this.isOngoing = false;
 	}
 }

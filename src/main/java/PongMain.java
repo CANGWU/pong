@@ -9,7 +9,7 @@ public class PongMain {
 		window.setLocation(100, 200);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Panel pongPanel = new Panel();
-		ScorePanel scorePanel = new ScorePanel(0,0);
+		ScorePanel scorePanel = new ScorePanel(pongPanel);
 		pongPanel.addPongBallListener(scorePanel);
 		window.setResizable(false);
 		new PanelListener(pongPanel);
